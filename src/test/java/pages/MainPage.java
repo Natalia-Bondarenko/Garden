@@ -1,31 +1,42 @@
-import com.codeborne.selenide.Configuration;
-import org.apache.log4j.Logger;
-import selenideLessons.SelenideLesson002;
+/*
 
+ * Classname site
+ *
+ * Version information 1.0
+ *
+ * Date 2025-07-25
+ *
+ * Copyright notice - ALL RIGHTS RESERVED
+ */
+
+package pages;
+
+import com.codeborne.selenide.Configuration;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.openqa.selenium.devtools.v134.browser.Browser.close;
 
-public class TestSemenaPartnerBySteps {
+public class MainPage {
 
-    public static void main(String[] args) {
-
-        final Logger log = Logger.getLogger(SelenideLesson002.class);
-
-        log.info("Info message is");
-
+    public static void openBrowser() {
         // Идентификация элементов на веб-странице с использованием Selenide
         Configuration.browser = "chrome";// Используем браузер Chrome
 
+    }
+
+    public static void loadPage() {
+
         // Открываем страницу Агрофирма Партнёр
         open("https://semena-partner.ru/");
+    }
 
-        // Ждем 30 секунд, чтобы увидеть результаты (можно заменить на ожидание конкретного элемента)
-        sleep(1000);
+    public static void closeBrowser() {
+        // Ждем 30 секунд
+        sleep(3000);
 
         // Закрываем браузер
         close();
 
-
     }
+
 }
