@@ -1,3 +1,5 @@
+package selenideLessons;
+
 import com.codeborne.selenide.Configuration;
 
 import static com.codeborne.selenide.Selenide.*;

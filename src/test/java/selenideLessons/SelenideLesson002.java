@@ -1,24 +1,30 @@
+package selenideLessons;
+
+import org.apache.log4j.Logger;
+
 import com.codeborne.selenide.Configuration;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.devtools.v134.browser.Browser.close;
 
-public class SelenideLesson001 {
-
+public class SelenideLesson002 {
     public static void main(String[] args) {
 
-        // Устанавливаем настройки Selenide (можно опустить, если необходимо)
+        final Logger log = Logger.getLogger(SelenideLesson002.class);
+
+        log.info("Info message is");
+
+        // Идентификация элементов на веб-странице с использованием Selenide
         Configuration.browser = "chrome";// Используем браузер Chrome
 
         Exercise1();
 
-        Exercise2();
+        //Exercise2();
 
-        Exercise3();
+        //Exercise3();
 
-        Exercise4();
+        //Exercise4();
 
         // Ждем 30 секунд, чтобы увидеть результаты (можно заменить на ожидание конкретного элемента)
         sleep(3000);
@@ -36,11 +42,11 @@ public class SelenideLesson001 {
         // Открываем страницу турагенство Травелата
         open("https://travelata.ru/");
 
-        $(By.id("startSearch")).click();
+        $("#startSearch").click();
 
-        //$(By.xpath("//span[@class=\"HeaderNav-TabCover\"]")).shouldHave(text("поиск"));
-
-        String elementText = $(By.xpath("//div[@class=\"calendar-lp-serp__header-title\"]")).getText();
+        //String elementText = $x("//div[@class=\"calendar-lp-serp__header-title\"]").getText();
+        //String elementText = $("div[class='calendar-lp-serp__header-title']").getText();
+        String elementText = $(".calendar-lp-serp__header-title").getText();
 
         if (elementText.equals("Календарь низких цен")) {
             System.out.println("Заголовок появился: " + elementText);
@@ -58,14 +64,16 @@ public class SelenideLesson001 {
         // Открываем страницу РЖД
         open("https://www.rzd.ru/");
 
-        if ($$(By.xpath("//img[@data-test-id=\"logo\"]")).filter(visible).size() > 0) {
+        //if ($$(By.xpath("//img[@data-test-id=\"logo\"]")).filter(visible).size() > 0) {
+        if ($$("img[data-test-id='logo']").filter(visible).size() > 0) {
             System.out.println("Лого ЕСТЬ!");
         } else {
             System.out.println("Лого НЕТ...");
         }
 
         String attribute = "alt";
-        String attributeValue = $(By.xpath("//img[@data-test-id=\"logo\"]")).getAttribute(attribute);
+        //String attributeValue = $(By.xpath("//img[@data-test-id=\"logo\"]")).getAttribute(attribute);
+        String attributeValue = $("img[data-test-id='logo']").getAttribute(attribute);
 
         if (attributeValue.equals("null")) {
             System.out.println("Атрибут " + attribute + " отсутвсвует...");
@@ -90,35 +98,35 @@ public class SelenideLesson001 {
 
         // Найти поля и вставить нужную инфорацию
         //Отказать в куки
-        $(By.xpath("//button[@class=\"btn btn-default mc-btn-all\"]")).click();
+        $("button[class='btn btn-default mc-btn-all']").click();
 
         sleep(3000);
 
         String from = "Москва";
         //Заполнение поля "Откуда"
-        $(By.id("acFrom")).setValue(from);
+        $("#acFrom").setValue(from);
 
         sleep(3000);
 
         String to = "Минск";
 
         //Заполнение поля "Куда"
-        $(By.id("acTo")).setValue(to);
+        $("#acTo").setValue(to);
 
         sleep(3000);
 
         //Заполнение поля "Дата"
-        $(By.id("yDate")).setValue("25.04.2025");
+        $("#yDate").setValue("25.04.2025");
 
         sleep(3000);
 
         //Нажатие на кнопку "Найти"
-        $(By.xpath("//span[@class=\"std-button\"]")).click();
+        $(".std-button").click();
 
         sleep(3000);
 
         //Нажатие на кнопку "Отклонить" cookie
-        $(By.xpath("//button[@class=\"btn btn-index mc-decline-all\"]")).click();
+        $("button[class='btn btn-index mc-decline-all']").click();
 
         //Нажатие на значок "Закрыть" онлайн-консультант
         //$(By.xpath("//div[@class=\"webim-actions\"]")).click();
@@ -126,7 +134,7 @@ public class SelenideLesson001 {
         sleep(3000);
 
         // Чтение появляющегося сообщения
-        String elementText = $(By.xpath("//div[@class=\"sch-title\"]")).getText();
+        String elementText = $(".sch-title").getText();
 
         System.out.println("Текст элемента: " + elementText);
 
@@ -148,7 +156,7 @@ public class SelenideLesson001 {
         open("https://semena-partner.ru/");
 
         //Получение текста заголовка
-        String elementText = $(By.cssSelector("div.Main-product_title")).getText();
+        String elementText = $(".Main-product_title").getText();
 
 
         if (elementText != null) {
@@ -158,5 +166,4 @@ public class SelenideLesson001 {
         }
 
     }
-
 }
